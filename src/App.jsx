@@ -1,10 +1,10 @@
-import Dashboard from './components/Dashboard';
+import Dashboard from './pages/Dashboard';
 
 function App() {
 
   return (
     <div className="App h-full">
-      <Dashboard></Dashboard>
+      <Dashboard />
     </div>
   )
 }
