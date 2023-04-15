@@ -17,6 +17,9 @@ function Chart() {
     ["2023-12-31", 15000]
   ]
 
+  let monthsToShow = 12;
+  let isSmallScreen = true;
+
   var option = {
     color: ["#3398DB"],
     tooltip: {
@@ -25,14 +28,13 @@ function Chart() {
         type: 'shadow',
       }
     },
-    legend: {
-      data: ['mileage']
-    },
     xAxis: {
       type: 'time',
       name: 'Date',
-      min: mileageHistory[0][0],
-      max: mileageProjection[mileageProjection.length-1][0],
+      nameLocation: 'center',
+      nameGap: 30,
+      splitNumber: monthsToShow,
+      boundaryGap: [0, 0.01],
       axisLine: {
         show: true,
         lineStyle: {
@@ -43,6 +45,14 @@ function Chart() {
     yAxis: {
       type: 'value',
       name: 'Mileage',
+      axisLabel: {
+        formatter: function (value) {
+          if (isSmallScreen && value >= 1000) {
+            return value/1000 + 'k';
+          }
+          return value;
+        }
+      },
       min: 16,
       max: 15000,
       splitLine: {
@@ -68,33 +78,37 @@ function Chart() {
         type: 'line',
         smooth: true,
         lineStyle: {
-          normal: {
-            type: 'dashed'
-          }
+          type: 'dashed'
         }
       }
     ]
   };
 
   useEffect(() => {
-    const chart = init(document.getElementById('chart'));
-
-    const resizeChart = () => {
-      chart.resize()
+    const loadOption = () => {
+      isSmallScreen = window.innerWidth < 450 ? true : false;
+      monthsToShow = window.innerWidth < 450 ? 4 : 12;
+      option.xAxis.splitNumber = monthsToShow;
+      chart.setOption(option);
     }
 
-    window.addEventListener("resize", resizeChart);
+    const handleWindowResize = () => {
+      chart.resize();
+      loadOption();
+    }
 
-    chart.setOption(option);
+    const chart = init(document.getElementById('chart'));
+    window.addEventListener("resize", handleWindowResize);
+    loadOption();
 
     return () => {
       chart.dispose();
-      window.removeEventListener("resize", resizeChart);
+      window.removeEventListener("resize", handleWindowResize);
     }
-  }, [])
+  }, []);
 
   return (
-    <div id="chart" className="w-full h-[32rem]"></div>
+    <div id="chart" className="w-full h-[24rem] max-h-screen ml-[8px]"></div>
   )
 }
 
