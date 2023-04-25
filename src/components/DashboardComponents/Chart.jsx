@@ -1,22 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { init } from "echarts";
 
-function Chart() {
-
-  const mileageHistory = [
-    ["2023-02-27", 16],
-    ["2023-03-05", 378],
-    ["2023-03-16", 824],
-    ["2023-03-23", 1371],
-    ["2023-04-01", 1918],
-    ["2023-04-13", 2287]
-  ]
-
-  const mileageProjection = [
-    ["2023-04-13", 2287],
-    ["2023-12-31", 15000]
-  ]
-
+function Chart({combinedHistory}) {
   let monthsToShow = 12;
   let isSmallScreen = true;
 
@@ -69,20 +54,18 @@ function Chart() {
     },
     series: [
       {
-        data: mileageHistory,
+        data: combinedHistory,
         type: 'line',
-        smooth: true
-      },
-      {
-        data: mileageProjection,
-        type: 'line',
-        smooth: true,
-        lineStyle: {
-          type: 'dashed'
+        markArea: {
+          itemStyle: {
+            color: 'rgba(0, 0, 0, 0.1)',
+          },
+          data: []
         }
       }
     ]
   };
+
 
   useEffect(() => {
     const loadOption = () => {
@@ -99,13 +82,14 @@ function Chart() {
 
     const chart = init(document.getElementById('chart'));
     window.addEventListener("resize", handleWindowResize);
+    
     loadOption();
 
     return () => {
       chart.dispose();
       window.removeEventListener("resize", handleWindowResize);
     }
-  }, []);
+  }, [combinedHistory]);
 
   return (
     <div id="chart" className="w-full h-[24rem] max-h-screen ml-[8px]"></div>
