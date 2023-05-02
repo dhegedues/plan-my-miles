@@ -8,7 +8,7 @@ function DashboardContent() {
   const [mileageUnit, setMileageUnit] = useState('km');
   const [minMileage, setMinMileage] = useState(16);
   const [maxMileage, setMaxMileage] = useState(15000);
-  const [currentMileage, setCurrentMileage] = useState(2608);
+  const [currentMileage, setCurrentMileage] = useState(1500000);
   const [currentDate, setCurrentDate] = useState("2023-04-24");
   const [minDate, setMinDate] = useState("2023-02-27");
   const [maxDate, setMaxDate] = useState("2023-12-31");
@@ -72,6 +72,19 @@ function DashboardContent() {
   }
 
   useEffect(() => {
+    setMileageHistory([
+      [minDate, minMileage],
+      ["2023-03-05", 378],
+      ["2023-03-16", 824],
+      ["2023-03-23", 1371],
+      ["2023-04-01", 1918],
+      ["2023-04-13", 2287],
+      [currentDate, currentMileage],
+      [maxDate, maxMileage]
+    ]);
+  }, [currentMileage]);
+
+  useEffect(() => {
     setTripsMileage(sumTripsMileages());
     setTripsDays(sumTripsDays());
   }, [trips]);
@@ -89,10 +102,14 @@ function DashboardContent() {
     setAllowedMileagePerDay(availableMileage / availableDays);
   }, [availableMileage, availableDays]);
 
+  useEffect(() => {
+    setWeeklyAverage(calcWeeklyAverage());
+  }, [currentMileage, minMileage, minDate, currentDate])
+
   return (
     <div className="bg-gray-50 px-4 py-5 sm:p-6 flex flex-col gap-8">
-      <MileageStats currentMileage={currentMileage} weeklyAverage={weeklyAverage} allowedMileagePerDay={allowedMileagePerDay} remainingWeeks={remainingWeeks} mileageUnit={mileageUnit} />
-      <Projection mileageHistory={mileageHistory} trips={trips} allowedMileagePerDay={allowedMileagePerDay}/>
+      <MileageStats currentMileage={currentMileage} setCurrentMileage={setCurrentMileage} weeklyAverage={weeklyAverage} allowedMileagePerDay={allowedMileagePerDay} remainingWeeks={remainingWeeks} mileageUnit={mileageUnit} />
+      <Projection mileageHistory={mileageHistory} trips={trips} allowedMileagePerDay={allowedMileagePerDay} />
       <Trips />
     </div>
   )
