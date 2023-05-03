@@ -9,7 +9,8 @@ export default {
   theme: {
     extend: {
       screens: {
-        'xs': '310px'
+        'xs': '310px',
+        'xsp': '375px'
       },
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],

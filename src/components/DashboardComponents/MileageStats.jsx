@@ -17,7 +17,7 @@ function MileageStats({mileageUnit, currentMileage, setCurrentMileage, weeklyAve
   return (
     <div>
       <h2 className="text-lg font-medium leading-6 text-gray-900">Mileage</h2>
-      <div className="mt-2 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-3 xs:gap-4 sm:gap-5">
+      <div className="mt-2 grid grid-cols-1 xsp:grid-cols-2 sm:grid-cols-3 gap-3 xs:gap-4 sm:gap-5">
         {cards.map((card) => (
           <StatsCard key={card.name} cardData={card} mileageUnit={mileageUnit}/>
         ))}

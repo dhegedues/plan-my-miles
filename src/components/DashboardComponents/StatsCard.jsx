@@ -19,7 +19,7 @@ function StatsCard({cardData, mileageUnit}) {
     return (
       <div className="">
         <label htmlFor={cardData.name} className="block text-sm font-medium text-gray-500 m-0 p-0">{cardData.name}</label>
-        <div className="grid">
+        <div className="overflow-hidden">
           <input
             type="number"
             name={cardData.name}
@@ -28,7 +28,7 @@ function StatsCard({cardData, mileageUnit}) {
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
             autoFocus={currentlyEditing}
-            className="w-5/6 text-gray-900 font-semibold text-xl sm:text-2xl p-0 border-none focus:ring-0 focus:border-b-2 focus:border-b-red-600"/>
+            className="w-[calc(100%-1.25rem)] text-gray-900 font-semibold text-xl sm:text-2xl p-0 border-none focus:ring-0 focus:border-b-2 focus:border-b-red-600"/>
         </div>
       </div>
     )
@@ -67,9 +67,9 @@ function StatsCard({cardData, mileageUnit}) {
   return (
     <div
       key={cardData.name} 
-      className={`overflow-hidden rounded-lg bg-white shadow ${currentlyEditing && 'ring-2 ring-inset ring-indigo-600'}`}
+      className={`overflow-hidden rounded-lg bg-white shadow ${currentlyEditing ? 'ring-2 ring-inset ring-indigo-600' : ''}`}
     >
-      <div className="p-3 xs:p-4 sm:p-5 flex items-center justify-between">
+      <div className="p-3 xsp:p-4 sm:p-5 flex items-center justify-between">
         {currentlyEditing
           ? editableInfo()
           : staticInfo()
@@ -77,7 +77,7 @@ function StatsCard({cardData, mileageUnit}) {
         {cardData.editAction && 
           <button
             type="button"
-            className="inline-flex items-center rounded-full bg-white p-3 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 "
+            className="inline-flex items-center rounded-full bg-white p-3 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
             onClick={toggleEditing}
           >
           {currentlyEditing
