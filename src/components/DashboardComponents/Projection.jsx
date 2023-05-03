@@ -37,11 +37,9 @@ function Projection({mileageHistory, trips, allowedMileagePerDay}) {
   return (
     <div>
       <h2 className="text-lg font-medium leading-6 text-gray-900">Projection</h2>
-      <div className="mt-2 overflow-hidden rounded-lg bg-gray-200">
-        {allowedMileagePerDay > 0
-          ? <Chart combinedHistory={combinedHistory} />
-          : <span className="text-red-800">Please check your inputs, your allowed mileage is negative.</span>
-        }
+      <div className={`mt-2 overflow-hidden rounded-lg bg-gray-200 relative ${allowedMileagePerDay < 0 ? '[&>#chart]:invisible [&>span]:visible' : ''}`}>
+        <Chart combinedHistory={combinedHistory} />
+        <span className="text-red-800 invisible absolute top-3 left-3">Please check your inputs, your allowed mileage is negative.</span>
       </div>
     </div>
   )
