@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { init } from "echarts";
 
-function Chart({combinedHistory}) {
-  let monthsToShow = 12;
+function Chart({combinedHistory, mileageUnit, chartTripData}) {
   let isSmallScreen = true;
 
   var option = {
@@ -11,14 +10,15 @@ function Chart({combinedHistory}) {
       trigger: 'axis',
       axisPointer: {
         type: 'shadow',
-      }
+      },
+      valueFormatter: value => `${Math.floor(value)} ${mileageUnit}` 
     },
     xAxis: {
       type: 'time',
       name: 'Date',
       nameLocation: 'center',
       nameGap: 30,
-      splitNumber: monthsToShow,
+      splitNumber: 5,
       boundaryGap: [0, 0.01],
       axisLine: {
         show: true,
@@ -42,7 +42,7 @@ function Chart({combinedHistory}) {
       max: 15000,
       splitLine: {
         lineStyle: {
-          color: '#9ca3af'
+          color: 'rgba(200, 200, 200, 1)'
         }
       },
       axisLine: {
@@ -57,21 +57,21 @@ function Chart({combinedHistory}) {
         data: combinedHistory,
         type: 'line',
         markArea: {
+          label: {
+            show: true
+          },
           itemStyle: {
             color: 'rgba(0, 0, 0, 0.1)',
           },
-          data: []
+          data: chartTripData
         }
       }
     ]
   };
 
-
   useEffect(() => {
     const loadOption = () => {
       isSmallScreen = window.innerWidth < 450 ? true : false;
-      monthsToShow = window.innerWidth < 450 ? 4 : 12;
-      option.xAxis.splitNumber = monthsToShow;
       chart.setOption(option);
     }
 
@@ -89,7 +89,7 @@ function Chart({combinedHistory}) {
       chart.dispose();
       window.removeEventListener("resize", handleWindowResize);
     }
-  }, [combinedHistory]);
+  }, [combinedHistory, chartTripData, mileageUnit]);
 
   return (
     <div id="chart" className="w-full h-[24rem] max-h-screen ml-[8px]"></div>

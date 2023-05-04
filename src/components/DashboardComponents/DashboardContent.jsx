@@ -104,12 +104,12 @@ function DashboardContent() {
 
   useEffect(() => {
     setWeeklyAverage(calcWeeklyAverage());
-  }, [currentMileage, minMileage, minDate, currentDate])
+  }, [currentMileage, minMileage, minDate, currentDate]);
 
   return (
     <div className="bg-gray-50 px-4 py-5 sm:p-6 flex flex-col gap-8">
       <MileageStats currentMileage={currentMileage} setCurrentMileage={setCurrentMileage} weeklyAverage={weeklyAverage} allowedMileagePerDay={allowedMileagePerDay} remainingWeeks={remainingWeeks} mileageUnit={mileageUnit} />
-      <Projection mileageHistory={mileageHistory} trips={trips} allowedMileagePerDay={allowedMileagePerDay} />
+      <Projection mileageHistory={mileageHistory} trips={trips} allowedMileagePerDay={allowedMileagePerDay} mileageUnit={mileageUnit} />
       <Trips />
     </div>
   )
