@@ -30,6 +30,9 @@ function Chart({combinedHistory, mileageUnit, chartTripData}) {
     yAxis: {
       type: 'value',
       name: 'Mileage',
+      nameTextStyle: {
+        align: 'right'
+      },
       axisLabel: {
         formatter: function (value) {
           if (isSmallScreen && value >= 1000) {
@@ -71,7 +74,19 @@ function Chart({combinedHistory, mileageUnit, chartTripData}) {
 
   useEffect(() => {
     const loadOption = () => {
-      isSmallScreen = window.innerWidth < 450 ? true : false;
+      if (window.innerWidth < 450) {
+        isSmallScreen = true;
+        option.yAxis.nameTextStyle.align = 'center';
+        
+        if (window.innerWidth < 320) {
+          option.series[0].markArea.label.show = false;
+        }
+      } else {
+        isSmallScreen = false;
+        option.yAxis.nameTextStyle.align = 'right';
+        option.series[0].markArea.label.show = true;
+      }
+
       chart.setOption(option);
     }
 
