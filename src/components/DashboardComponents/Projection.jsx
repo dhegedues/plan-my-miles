@@ -57,10 +57,10 @@ function Projection({mileageHistory, trips, allowedMileagePerDay, mileageUnit, i
       <h2 className="text-lg font-medium leading-6 text-gray-900">Projection</h2>
       <div className="mt-2 h-[24rem] flex flex-col justify-center items-center overflow-hidden rounded-lg bg-white shadow relative">
         { inputsAreInvalid
-          ? <>
+          ? <div className="p-5 flex flex-col xs:items-center xs:text-center">
               <PresentationChartLineIcon className="h-8 w-8 mb-3 text-gray-400" aria-hidden="true" />
               <p className="text-gray-700">Chart will be displayed when conflicting inputs are resolved</p>
-            </>
+            </div>
           : <Chart combinedHistory={combinedHistory} mileageUnit={mileageUnit} chartTripData={chartTripData} />
         }
       </div>
