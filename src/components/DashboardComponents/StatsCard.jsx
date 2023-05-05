@@ -50,20 +50,6 @@ function StatsCard({cardData, mileageUnit}) {
     setCurrentlyEditing(!currentlyEditing);
   }
 
-  useEffect(() => {
-    const stopEditingOnFocusout = () => {
-      setCurrentlyEditing(false);
-    }
-
-    if (currentlyEditing) {
-      document.addEventListener('focusout', stopEditingOnFocusout);
-    }
-    
-    return () => {
-      document.removeEventListener('focusout', stopEditingOnFocusout);
-    }
-  }, [currentlyEditing])
-
   return (
     <div
       key={cardData.name} 
