@@ -69,7 +69,7 @@ function StatsCard({cardData, mileageUnit}) {
       key={cardData.name} 
       aria-invalid={`${cardData.amount > cardData.maxAmount || cardData.amount < cardData.minAmount}`}
       aria-describedby=''
-      className={`overflow-hidden rounded-lg bg-white shadow ring-2 ring-inset ring-transparent ${currentlyEditing ? 'ring-indigo-600' : ''} aria-invalid:ring-red-600`}
+      className={`overflow-hidden rounded-lg bg-white shadow ring-2 ring-inset ${currentlyEditing ? 'ring-indigo-600' : 'ring-transparent'} aria-invalid:ring-red-600`}
     >
       <div className="p-3 xsp:p-4 sm:p-5 flex items-center justify-between">
         {currentlyEditing
