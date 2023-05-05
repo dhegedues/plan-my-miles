@@ -8,7 +8,7 @@ function DashboardContent() {
   const [mileageUnit, setMileageUnit] = useState('km');
   const [minMileage, setMinMileage] = useState(16);
   const [maxMileage, setMaxMileage] = useState(15000);
-  const [currentMileage, setCurrentMileage] = useState(1500000);
+  const [currentMileage, setCurrentMileage] = useState(3900);
   const [currentDate, setCurrentDate] = useState("2023-04-24");
   const [minDate, setMinDate] = useState("2023-02-27");
   const [maxDate, setMaxDate] = useState("2023-12-31");
@@ -108,7 +108,7 @@ function DashboardContent() {
 
   return (
     <div className="bg-gray-50 px-4 py-5 sm:p-6 flex flex-col gap-8">
-      <MileageStats currentMileage={currentMileage} setCurrentMileage={setCurrentMileage} weeklyAverage={weeklyAverage} allowedMileagePerDay={allowedMileagePerDay} remainingWeeks={remainingWeeks} mileageUnit={mileageUnit} />
+      <MileageStats currentMileage={currentMileage} setCurrentMileage={setCurrentMileage} minMileage={minMileage} maxMileage={maxMileage} weeklyAverage={weeklyAverage} allowedMileagePerDay={allowedMileagePerDay} remainingWeeks={remainingWeeks} mileageUnit={mileageUnit} />
       <Projection mileageHistory={mileageHistory} trips={trips} allowedMileagePerDay={allowedMileagePerDay} mileageUnit={mileageUnit} />
       <Trips />
     </div>

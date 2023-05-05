@@ -28,7 +28,7 @@ function StatsCard({cardData, mileageUnit}) {
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
             autoFocus={currentlyEditing}
-            className="w-[calc(100%-1.25rem)] text-gray-900 font-semibold text-xl sm:text-2xl p-0 border-none focus:ring-0 focus:border-b-2 focus:border-b-red-600"/>
+            className="w-[calc(100%-1.25rem)] text-gray-900 font-semibold text-xl sm:text-2xl p-0 border-none focus:ring-0"/>
         </div>
       </div>
     )
@@ -67,7 +67,9 @@ function StatsCard({cardData, mileageUnit}) {
   return (
     <div
       key={cardData.name} 
-      className={`overflow-hidden rounded-lg bg-white shadow ${currentlyEditing ? 'ring-2 ring-inset ring-indigo-600' : ''}`}
+      aria-invalid={`${cardData.amount > cardData.maxAmount || cardData.amount < cardData.minAmount}`}
+      aria-describedby=''
+      className={`overflow-hidden rounded-lg bg-white shadow ring-2 ring-inset ring-transparent ${currentlyEditing ? 'ring-indigo-600' : ''} aria-invalid:ring-red-600`}
     >
       <div className="p-3 xsp:p-4 sm:p-5 flex items-center justify-between">
         {currentlyEditing

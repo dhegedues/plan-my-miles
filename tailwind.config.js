@@ -15,6 +15,9 @@ export default {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
+      aria: {
+        invalid: 'invalid="true"',
+      },
     },
   },
   plugins: [

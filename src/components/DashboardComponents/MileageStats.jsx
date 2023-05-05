@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import StatsCard from "./StatsCard";
 
-function MileageStats({mileageUnit, currentMileage, setCurrentMileage, weeklyAverage, allowedMileagePerDay, remainingWeeks}) {
+function MileageStats({mileageUnit, currentMileage, setCurrentMileage, minMileage, maxMileage, weeklyAverage, allowedMileagePerDay, remainingWeeks}) {
   const [weeklyTarget, setWeeklyTarget] = useState(allowedMileagePerDay*7);
 
   const cards = [
-    { name: 'Current', amount: currentMileage, editAction: setCurrentMileage },
+    { name: 'Current', amount: currentMileage, minAmount: minMileage, maxAmount: maxMileage, editAction: setCurrentMileage },
     { name: 'Weekly average', amount: Math.floor(weeklyAverage)},
     { name: 'Weekly target', amount: Math.floor(weeklyTarget)},
   ];
