@@ -107,7 +107,7 @@ function Chart({combinedHistory, mileageUnit, chartTripData}) {
   }, [combinedHistory, chartTripData, mileageUnit]);
 
   return (
-    <div id="chart" className="w-full h-[24rem] max-h-screen ml-[8px]"></div>
+    <div id="chart" className="w-full h-full ml-[8px]"></div>
   )
 }
 

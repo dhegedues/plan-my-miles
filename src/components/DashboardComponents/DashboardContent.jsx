@@ -52,6 +52,7 @@ function DashboardContent() {
   const [allowedMileagePerDay, setAllowedMileagePerDay] = useState(availableMileage / availableDays);
   const [weeklyAverage, setWeeklyAverage] = useState(calcWeeklyAverage());
   const [remainingWeeks, setRemainingWeeks] = useState(calcRemainingWeeks());
+  const [inputsAreInvalid, setInputsAreInvalid] = useState(false);
 
   function sumTripsMileages() {
     return trips.reduce((accumulator, currentTrip) => accumulator + currentTrip.mileageNeeded, 0);
@@ -108,8 +109,8 @@ function DashboardContent() {
 
   return (
     <div className="bg-gray-50 px-4 py-5 sm:p-6 flex flex-col gap-8">
-      <MileageStats currentMileage={currentMileage} setCurrentMileage={setCurrentMileage} minMileage={minMileage} maxMileage={maxMileage} weeklyAverage={weeklyAverage} allowedMileagePerDay={allowedMileagePerDay} remainingWeeks={remainingWeeks} mileageUnit={mileageUnit} />
-      <Projection mileageHistory={mileageHistory} trips={trips} allowedMileagePerDay={allowedMileagePerDay} mileageUnit={mileageUnit} />
+      <MileageStats currentMileage={currentMileage} setCurrentMileage={setCurrentMileage} minMileage={minMileage} maxMileage={maxMileage} weeklyAverage={weeklyAverage} allowedMileagePerDay={allowedMileagePerDay} remainingWeeks={remainingWeeks} mileageUnit={mileageUnit} inputsAreInvalid={inputsAreInvalid} setInputsAreInvalid={setInputsAreInvalid} />
+      <Projection mileageHistory={mileageHistory} trips={trips} allowedMileagePerDay={allowedMileagePerDay} mileageUnit={mileageUnit} inputsAreInvalid={inputsAreInvalid} />
       <Trips />
     </div>
   )

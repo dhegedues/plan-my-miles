@@ -1,8 +1,9 @@
 import Chart from "./Chart";
 import { daysBetween } from "../../utils/dates";
 import { useEffect, useState } from "react";
+import { PresentationChartLineIcon } from '@heroicons/react/20/solid';
 
-function Projection({mileageHistory, trips, allowedMileagePerDay, mileageUnit}) {
+function Projection({mileageHistory, trips, allowedMileagePerDay, mileageUnit, inputsAreInvalid}) {
 
   const [combinedHistory, setCombinedHistory] = useState(combineHistories());
   const [chartTripData, setChartTripData] = useState();
@@ -54,9 +55,14 @@ function Projection({mileageHistory, trips, allowedMileagePerDay, mileageUnit}) 
   return (
     <div>
       <h2 className="text-lg font-medium leading-6 text-gray-900">Projection</h2>
-      <div className={`mt-2 overflow-hidden rounded-lg bg-white shadow relative ${allowedMileagePerDay < 0 ? '[&>#chart]:invisible [&>span]:visible' : ''}`}>
-        <Chart combinedHistory={combinedHistory} mileageUnit={mileageUnit} chartTripData={chartTripData} />
-        <span className="text-red-800 invisible absolute top-3 left-3">Please check your inputs, your allowed mileage is negative.</span>
+      <div className="mt-2 h-[24rem] flex flex-col justify-center items-center overflow-hidden rounded-lg bg-white shadow relative">
+        { inputsAreInvalid
+          ? <>
+              <PresentationChartLineIcon className="h-8 w-8 mb-3 text-gray-400" aria-hidden="true" />
+              <p className="text-gray-700">Chart will be displayed when conflicting inputs are resolved</p>
+            </>
+          : <Chart combinedHistory={combinedHistory} mileageUnit={mileageUnit} chartTripData={chartTripData} />
+        }
       </div>
     </div>
   )

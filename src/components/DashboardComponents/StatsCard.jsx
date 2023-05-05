@@ -1,7 +1,17 @@
-import { useState, useRef, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { PencilIcon, CheckIcon } from '@heroicons/react/20/solid';
 
-function StatsCard({cardData, mileageUnit}) {
+function StatsCard({cardData, mileageUnit, setInputsAreInvalid}) {
+
+  const [cardInputIsInvalid, setCardInputIsInvalid] = useState(cardData.amount > cardData.maxAmount || cardData.amount < cardData.minAmount);
+
+  useEffect(() => {
+    setCardInputIsInvalid(cardData.amount > cardData.maxAmount || cardData.amount < cardData.minAmount);
+  }, [cardData]);
+
+  useEffect(() => {
+    setInputsAreInvalid(cardInputIsInvalid);
+  }, [cardInputIsInvalid])
 
   const staticInfo = () => {
     return (
@@ -53,7 +63,7 @@ function StatsCard({cardData, mileageUnit}) {
   return (
     <div
       key={cardData.name} 
-      aria-invalid={`${cardData.amount > cardData.maxAmount || cardData.amount < cardData.minAmount}`}
+      aria-invalid={cardInputIsInvalid}
       aria-describedby=''
       className={`overflow-hidden rounded-lg bg-white shadow ring-2 ring-inset ${currentlyEditing ? 'ring-indigo-600' : 'ring-transparent'} aria-invalid:ring-red-600`}
     >
