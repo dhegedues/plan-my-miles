@@ -1,6 +1,12 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore, doc, setDoc, updateDoc } from "firebase/firestore";
+import { getAuth, connectAuthEmulator } from "firebase/auth";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  updateDoc,
+  connectFirestoreEmulator,
+} from "firebase/firestore";
 import { getCurrentDate } from "../utils/utils";
 
 const firebaseConfig = {
@@ -17,6 +23,11 @@ const firebaseApp = initializeApp(firebaseConfig);
 export const auth = getAuth(firebaseApp);
 
 export const db = getFirestore(firebaseApp);
+
+if (window.location.hostname === "localhost") {
+  connectAuthEmulator(auth, "http://localhost:9099");
+  connectFirestoreEmulator(db, "localhost", 8080);
+}
 
 export const updateDataField = async (dataFieldName, newValue) => {
   const { currentUser } = auth;
