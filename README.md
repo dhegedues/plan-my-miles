@@ -47,7 +47,8 @@ PlanMyMiles is a web app that distributes your vehicle lease or insurance mileag
 
 :globe_with_meridians: **View the live demo over at [planmymiles.web.app](https://planmymiles.web.app/)**
 
-<br />
+![Web Preview](public/images/readme_preview.png)
+
 <!-- USAGE EXAMPLES -->
 
 ### Usage
@@ -59,7 +60,8 @@ At the current state of development, new users are initialized with some sample 
 
 ## Roadmap
 
-- :white_check_mark: Base app with settings, widgets and chart
+:white_check_mark: Base app with settings, widgets and chart
+
 - [ ] Trips
   - Mileage that you use on trips will be subtracted from your everyday mileage
   - Chart will show how planned trips affect your mileage projection and whether you can afford them with your remaining mileage
@@ -68,8 +70,6 @@ At the current state of development, new users are initialized with some sample 
 - [ ] Multiple vehicles
 
 See the [open issues](https://github.com/dhegedues/plan-my-miles/issues) for a full list of proposed features and known issues.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <br />
 <!-- GETTING STARTED -->
@@ -134,7 +134,6 @@ If you want to try PlanMyMiles locally, these are the steps you have to follow.
    to see the users that you created (Tab `Authentication`) and their data in the Firestore (Tab `Firestore`).
    <br />
    <br />
-   <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
 
@@ -148,5 +147,3 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 ## Contact
 
 Feel free to email me at <david@hegedues.org> if you have any questions or suggestions!
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
