@@ -7,7 +7,12 @@ jobs:
   build_and_preview:
     if: "${{ github.event.pull_request.head.repo.full_name == github.repository }}"
     runs-on: ubuntu-latest
+    env:
+      VITE_INTERNAL: true
     steps:
+      - name: "Create .env.local"
+        run: |
+          echo "${{ secrets.VITE_ENV }}" > .env.local
       - uses: actions/checkout@v3
       - run: npm ci
       - run: npm test
@@ -18,4 +23,3 @@ jobs:
           projectId: planmymiles
         env:
           FIREBASE_CLI_EXPERIMENTS: webframeworks
-          VITE_INTERNAL: true
