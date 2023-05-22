@@ -44,7 +44,17 @@ function DashboardHeader({ showVehicleSettings, toggleShowVehicleSettings }) {
     >
       <div className="min-w-0">
         <h2 className="text-2xl font-bold leading-7 text-gray-800 sm:truncate sm:text-3xl sm:tracking-tight">
-          {showVehicleSettings ? "Settings" : vehicleName}
+          {showVehicleSettings ? (
+            <>
+              <CogIcon
+                className="xsp:hidden h-8 w-8 text-gray-400"
+                aria-hidden="true"
+              />
+              <span className="hidden xsp:block">Settings</span>
+            </>
+          ) : (
+            vehicleName
+          )}
         </h2>
       </div>
       <div className="flex md:ml-4 md:mt-0">
