@@ -47,7 +47,7 @@ PlanMyMiles is a web app that distributes your vehicle lease or insurance mileag
 
 :globe_with_meridians: **View the live demo over at [planmymiles.web.app](https://planmymiles.web.app/)**
 
-![Web Preview](public/images/readme_preview.png)
+![Web Preview](public/images/landing_preview.png)
 
 <!-- USAGE EXAMPLES -->
 
