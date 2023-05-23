@@ -12,16 +12,16 @@
     </li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li>
-      <a href="#getting-started">Developing locally</a>
+      <a href="#developing-locally">Developing locally</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-        <li><a href="#installation">Firebase Emulation and starting the app</a></li>
+        <li><a href="#firebase-setup">Firebase setup</a></li>
+        <li><a href="#local-project-setup">Local project setup</a></li>
+        <li><a href="#firebase-emulation-and-starting-the-app">Firebase Emulation and starting the app</a></li>
       </ul>
     </li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -29,25 +29,25 @@
 
 ## About The Project
 
-PlanMyMiles is a web app that distributes your vehicle lease or insurance mileage budget dynamically and lets you know if you have to change anything about your driving habits so that you can avoid costly overdraft.
+PlanMyMiles is a web app that distributes your vehicle lease or insurance mileage budget dynamically and it lets you know if you have to change anything about your driving habits so that you can avoid costly overdraft.
 <br />
 
 ### Built with:
 
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-![Firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white)
-![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
-![Vitest](https://img.shields.io/static/v1?style=for-the-badge&message=Vitest&color=6E9F18&logo=Vitest&logoColor=FFFFFF&label=)
+[![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)](#)
+[![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](#)
+[![Firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white)](#)
+[![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)](#)
+[![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)](#)
+[![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)](#)
+[![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)](#)
+[![Vitest](https://img.shields.io/static/v1?style=for-the-badge&message=Vitest&color=6E9F18&logo=Vitest&logoColor=FFFFFF&label=)](#)
 
 <br />
 
 :globe_with_meridians: **View the live demo over at [planmymiles.web.app](https://planmymiles.web.app/)**
 
-![Web Preview](public/images/landing_preview.png)
+[![Web Preview](public/images/landing_preview.png)](https://planmymiles.web.app/)
 
 <!-- USAGE EXAMPLES -->
 
@@ -60,11 +60,20 @@ At the current state of development, new users are initialized with some sample 
 
 ## Roadmap
 
-:white_check_mark: Base app with settings, widgets and chart
-
+- [x] Base app
+  - [x] Firebase Integration (Authentication, Database with real-time updates)
+  - [x] Guest Users
+  - [x] Registered Users
+  - [x] Dashboard with widgets and a chart displaying a basic mileage projection
+  - [x] Settings
+- [ ] Enhancements
+  - [ ] user onboarding on first time use
+  - [ ] create a registered user from a guest user session
+  - [ ] more precise error reporting towards users (e.g. regarding auth and invalid inputs)
+  - [ ] 404 page
 - [ ] Trips
-  - Mileage that you use on trips will be subtracted from your everyday mileage
-  - Chart will show how planned trips affect your mileage projection and whether you can afford them with your remaining mileage
+  - [ ] plan trips and see how they affect the mileage projection
+  - [ ] see how you can use your remaining mileage budget based on the comparison of everyday usage vs. trip usage
 - [ ] Progressive Web App functionality
 - [ ] Overdraft limit and costs
 - [ ] Multiple vehicles
@@ -82,52 +91,75 @@ If you want to try PlanMyMiles locally, these are the steps you have to follow.
 
 - Install Node.js and npm
 
-### Installation
+### Firebase setup
 
-1. Clone the project repository
-   ```sh
-   git clone https://github.com/dhegedues/plan-my-miles.git
+1. Create a project in the [Firebase Console](https://console.firebase.google.com)
+2. Add Firebase to your web app
+   1. Register your app
+      1. Choose an app nickname
+      2. Activate Firebase Hosting
+
+   2. Save the shown `firebaseConfig` somewhere, you will need it in a minute
+
+3. Setup Firebase CLI
+
+   1. Install `firebase-tools` globally
+
+      > I suggest using this specific version to prevent issues with wrong `esbuild` packages for ARM Macs
+
+      ```
+      npm install -g firebase-tools@12.0.1
+      ```
+
+   2. Log in with your Firebase account
+      ```
+      firebase login
+      ```
+   3. Enable web frameworks functionality for React
+      ```
+      firebase experiments:enable webframeworks
+      ```
+
+### Local project setup
+
+1. Clone the project repository and `cd` into it
+
    ```
-2. Install Firebase
-   ```sh
-   npm install firebase
+   git clone https://github.com/dhegedues/plan-my-miles.git && cd plan-my-miles
    ```
 
-### Firebase Emulation and starting the app
+2. With the contents of your `firebaseConfig` that you put aside earlier, create a file called `.env.local` in the root of the project directory, as follows. Put the values directly behind the `=`.
 
-1. Initialize Firebase
+    <pre style="line-height: 3rem">
+      VITE_FIREBASE_API_KEY=<b style="background-color: black; color: white; padding: 0.4em; margin-left: 3px; border-radius: 5px; ">apiKey</b>
+      VITE_FIREBASE_AUTH_DOMAIN=<b style="background-color: black; color: white; padding: 0.4em; margin-left: 3px; border-radius: 5px; ">authDomain</b>
+      VITE_FIREBASE_PROJECT_ID=<b style="background-color: black; color: white; padding: 0.4em; margin-left: 3px; border-radius: 5px; ">projectId</b>
+      VITE_FIREBASE_STORAGE_BUCKET=<b style="background-color: black; color: white; padding: 0.4em; margin-left: 3px; border-radius: 5px; ">storageBucket</b>
+      VITE_FIREBASE_MESSAGING_SENDER_ID=<b style="background-color: black; color: white; padding: 0.4em; margin-left: 3px; border-radius: 5px; ">messagingSenderId</b>
+      VITE_FIREBASE_APP_ID=<b style="background-color: black; color: white; padding: 0.4em; margin-left: 3px; border-radius: 5px; ">appId</b></pre>
 
-   ```sh
-   firebase init
+3. Modify `.firebaserc` to include your `projectId` instead of plan-my-miles.
+
+4. Install the dependencies
+    ```
+    npm install
+    ```
+
+### Firebase emulation and starting the app
+
+1. Start the emulators
    ```
-
-   1. When asked which Firebase features you want to set up, select `Emulators`
-
-   2. When asked which emulators you want to set up, select:
-
-      - `Authentication Emulator`
-      - `Firestore Emulator`
-      - `Hosting Emulator`
-
-   3. When asked which ports you want to use, select:
-
-      - `auth: 9099`
-      - `firestore: 8080`
-      - `hosting: 5000`
-
-      and confirm all other options to `enable the Emulator UI`, use any available port for it and to `download the emulators now`.
-
-2. Start the emulators
-   ```sh
    firebase emulators:start
    ```
-3. Ready!
+
+2. Ready!
    You should now be able to access the app at
    ```
    http://localhost:5000
    ```
-   Hit `Try it out` to create a guest user account or sign up on the login page!
-4. Visit the emulator suite at
+   Hit `Try it out` to create a guest user account or sign up on the `Login` page!
+
+3. Visit the emulator suite at
    ```
    http://localhost:4000
    ```
@@ -139,7 +171,7 @@ If you want to try PlanMyMiles locally, these are the steps you have to follow.
 
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See `LICENSE.md` for more information.
 
 <br />
 <!-- CONTACT -->

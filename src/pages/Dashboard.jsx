@@ -15,7 +15,7 @@ function Dashboard() {
     setShowVehicleSettings(!showVehicleSettings);
 
   return (
-    <div className="h-full flex items-center justify-center bg-black">
+    <div className="min-h-full flex items-center justify-center bg-black">
       {currentUser && dataLoaded && (
         <div className="h-full md:h-auto flex flex-col md:rounded-lg bg-white shadow-2xl w-[1024px]">
           <DashboardHeader
