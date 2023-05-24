@@ -171,7 +171,7 @@ If you want to try PlanMyMiles locally, these are the steps you have to follow.
 
 ## License
 
-Distributed under the MIT License. See `LICENSE.md` for more information.
+Distributed under the MIT License. See [License](./LICENSE.md) for more information.
 
 <br />
 <!-- CONTACT -->
