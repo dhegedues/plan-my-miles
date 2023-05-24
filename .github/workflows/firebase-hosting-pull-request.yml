@@ -17,6 +17,7 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseToolsVersion: "12.1.0"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_PLANMYMILES }}"
           projectId: planmymiles
         env:
