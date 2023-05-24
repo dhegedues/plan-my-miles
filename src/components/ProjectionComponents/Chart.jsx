@@ -15,7 +15,7 @@ function Chart() {
 
   const currentDate = getCurrentDate();
 
-  let isSmallScreen = true;
+  const isSmallScreen = () => window.innerWidth < 450;
 
   const dataToDisplay = [
     [minDate, minMileage],
@@ -61,7 +61,7 @@ function Chart() {
       },
       axisLabel: {
         formatter(value) {
-          if (isSmallScreen && value >= 1000) {
+          if (isSmallScreen() && value >= 1000) {
             return `${Math.floor(value / 1000)}k`;
           }
           return Math.floor(value);
@@ -93,12 +93,6 @@ function Chart() {
     const chart = init(document.getElementById("chart"));
 
     const loadOption = () => {
-      if (window.innerWidth < 450) {
-        isSmallScreen = true;
-      } else {
-        isSmallScreen = false;
-      }
-
       chart.setOption(option);
     };
 
