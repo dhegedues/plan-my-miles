@@ -35,7 +35,7 @@ function MileageStats({ inputsAreValid, setInputsAreValid }) {
   return (
     <div>
       <h2 className="text-lg font-medium leading-6 text-gray-900">Mileage</h2>
-      <div className="mt-2 grid grid-cols-1 xsp:grid-cols-2 sm:grid-cols-3 gap-3 xs:gap-4 sm:gap-5">
+      <div className="mt-2 grid grid-cols-1 xsp:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-5">
         <InputCard
           name="currentMileage"
           displayName="Current"
