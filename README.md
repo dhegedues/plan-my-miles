@@ -58,6 +58,11 @@ At the current state of development, new users are initialized with some sample 
 <br />
 <!-- ROADMAP -->
 
+[i5]: https://github.com/dhegedues/plan-my-miles/issues/5
+[i9]: https://github.com/dhegedues/plan-my-miles/issues/9
+[i10]: https://github.com/dhegedues/plan-my-miles/issues/10
+[i11]: https://github.com/dhegedues/plan-my-miles/issues/11
+[i13]: https://github.com/dhegedues/plan-my-miles/issues/13
 ## Roadmap
 
 - [x] Base app
@@ -67,16 +72,19 @@ At the current state of development, new users are initialized with some sample 
   - [x] Dashboard with widgets and a chart displaying a basic mileage projection
   - [x] Settings
 - [ ] Enhancements
-  - [ ] user onboarding on first time use
-  - [ ] create a registered user from a guest user session
-  - [ ] more precise error reporting towards users (e.g. regarding auth and invalid inputs)
-  - [ ] 404 page
+  - [ ] user onboarding on first time use ([#9][i9])
+  - [ ] create a registered user from a guest user session ([#10][i10])
+  - [ ] more precise error reporting towards users (e.g. regarding auth and invalid inputs, see [#5][i5] and [#11][i11])
+  - [ ] 404 page ([#13][i13])
 - [ ] Trips
   - [ ] plan trips and see how they affect the mileage projection
   - [ ] see how you can use your remaining mileage budget based on the comparison of everyday usage vs. trip usage
 - [ ] Progressive Web App functionality
 - [ ] Overdraft limit and costs
 - [ ] Multiple vehicles
+
+
+
 
 See the [open issues](https://github.com/dhegedues/plan-my-miles/issues) for a full list of proposed features and known issues.
 
@@ -171,7 +179,7 @@ If you want to try PlanMyMiles locally, these are the steps you have to follow.
 
 ## License
 
-Distributed under the MIT License. See `LICENSE.md` for more information.
+Distributed under the MIT License. See [License](./LICENSE.md) for more information.
 
 <br />
 <!-- CONTACT -->

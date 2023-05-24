@@ -21,7 +21,8 @@ function InputCard({
   };
 
   const handleInputChange = (event) => {
-    updateDataField(name, Number(event.target.value));
+    const numberFromInput = Number(event.target.value);
+    updateDataField(name, numberFromInput);
   };
 
   const handleKeyDown = (event) => {
@@ -38,11 +39,13 @@ function InputCard({
 
   useEffect(() => {
     const input = document.getElementById(name);
+    const maxWidth = "90%";
+
     if (currentlyEditing) {
       input.focus();
-      input.style.width = `${500 / 6}%`;
+      input.style.width = maxWidth;
     } else {
-      input.style.width = `${Math.min(input.value.length, 7)}ch`;
+      input.style.width = `min(${input.value.length}ch, ${maxWidth})`;
       document.activeElement.blur();
     }
   }, [currentlyEditing, amount]);
@@ -51,7 +54,7 @@ function InputCard({
     <div
       key={name}
       aria-invalid={cardInputIsInvalid}
-      className={`flex items-center justify-between p-3 sm:p-5 overflow-hidden rounded-lg bg-white shadow ring-2 ring-inset ${
+      className={`grid grid-cols-[1fr_auto] gap-3 p-3 sm:p-5 overflow-hidden rounded-lg bg-white shadow ring-2 ring-inset ${
         currentlyEditing ? "ring-indigo-600" : "ring-transparent"
       } aria-invalid:ring-red-600`}
     >
@@ -62,7 +65,7 @@ function InputCard({
         >
           {displayName}
         </label>
-        <div className="overflow-hidden">
+        <div className="flex flex-row items-baseline">
           <input
             type="number"
             name={name}
@@ -70,24 +73,26 @@ function InputCard({
             value={amount !== 0 ? amount : ""}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
-            className="w-5/6 text-gray-900 font-semibold text-xl sm:text-2xl p-0 border-none focus:ring-0"
+            className="w-[90%] text-gray-900 font-semibold text-xl sm:text-2xl p-0 border-none focus:ring-0"
           />
           {!currentlyEditing && (
             <span className="font-light text-gray-500">{amountUnit}</span>
           )}
         </div>
       </div>
-      <button
-        type="button"
-        className="inline-flex items-center rounded-full bg-white p-3 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-transparent hover:bg-gray-50"
-        onClick={toggleEditing}
-      >
-        {currentlyEditing ? (
-          <CheckIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-        ) : (
-          <PencilIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-        )}
-      </button>
+      <div className="flex items-center">
+        <button
+          type="button"
+          className="rounded-full bg-white p-3 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-transparent hover:bg-gray-50"
+          onClick={toggleEditing}
+        >
+          {currentlyEditing ? (
+            <CheckIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+          ) : (
+            <PencilIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+          )}
+        </button>
+      </div>
     </div>
   );
 }
