@@ -10,7 +10,7 @@ import { useAuth } from "../../firebase/Auth";
 
 function HeaderTitle({ vehicleName, showVehicleSettings }) {
   return (
-    <div className="min-w-0">
+    <div className="min-w-0 text-ellipsis">
       <h2 className="text-2xl font-bold leading-7 text-gray-800 sm:truncate sm:text-3xl sm:tracking-tight">
         {showVehicleSettings ? (
           <>
@@ -21,7 +21,7 @@ function HeaderTitle({ vehicleName, showVehicleSettings }) {
             <span className="hidden xsp:block">Settings</span>
           </>
         ) : (
-          vehicleName
+          <span className="break-all">{vehicleName}</span>
         )}
       </h2>
     </div>
@@ -109,7 +109,7 @@ function DashboardHeader({ showVehicleSettings, toggleShowVehicleSettings }) {
     <div
       className={`sticky top-0 bg-white ${
         showShadow ? "shadow-lg" : ""
-      } md:rounded-lg flex items-center justify-between px-4 py-5 sm:px-6`}
+      } md:rounded-lg flex items-center justify-between gap-3 px-4 py-5 sm:px-6`}
     >
       <HeaderTitle
         vehicleName={vehicleName}
