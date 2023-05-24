@@ -1,7 +1,14 @@
+const daysInAWeek = 7;
+const hoursInADay = 24;
+const secondsInAnHour = 3600;
+const millisecondsInASecond = 1000;
+const millisecondsInADay =
+  hoursInADay * secondsInAnHour * millisecondsInASecond;
+
 export function getCurrentDate() {
-  let date = new Date();
-  date = new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000);
-  return date.toISOString().split("T")[0];
+  const currentUTCDate = new Date().toISOString();
+  const currentUTCDateWithoutTime = currentUTCDate.split("T")[0];
+  return currentUTCDateWithoutTime;
 }
 
 export function getDaysBetween(startDateString, endDateString) {
@@ -9,15 +16,13 @@ export function getDaysBetween(startDateString, endDateString) {
   const endDate = new Date(endDateString);
   const timeDifference = endDate.getTime() - startDate.getTime();
 
-  let daysBetween = timeDifference / (1000 * 3600 * 24);
+  const daysBetween = timeDifference / millisecondsInADay;
 
+  // include both the starting and the end day, depending on whether the difference is negative or positive
   if (daysBetween < 0) {
-    daysBetween -= 1;
-  } else {
-    daysBetween += 1;
+    return daysBetween - 1;
   }
-
-  return daysBetween;
+  return daysBetween + 1;
 }
 
 export function getWeeklyAverageMileage(
@@ -28,8 +33,9 @@ export function getWeeklyAverageMileage(
 ) {
   const mileageDriven = currentMileage - minMileage;
   const daysUntilNow = getDaysBetween(minDate, currentDate);
+  const dailyAverage = mileageDriven / daysUntilNow;
 
-  return (mileageDriven / daysUntilNow) * 7;
+  return dailyAverage * daysInAWeek;
 }
 
 export function getAvailableMileage(currentMileage, maxMileage) {
@@ -37,7 +43,9 @@ export function getAvailableMileage(currentMileage, maxMileage) {
 }
 
 export function getRemainingWeeks(currentDate, maxDate) {
-  return getDaysBetween(currentDate, maxDate) / 7;
+  const daysTillEnd = getDaysBetween(currentDate, maxDate);
+
+  return daysTillEnd / daysInAWeek;
 }
 
 export function getWeeklyTargetMileage(availableMileage, remainingWeeks) {
