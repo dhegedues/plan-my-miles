@@ -1,3 +1,4 @@
+import { useInputValidity } from "../../contexts/InputValidity";
 import { useFirestore } from "../../firebase/Firestore";
 import {
   getCurrentDate,
@@ -9,7 +10,7 @@ import {
 import InputCard from "./InputCard";
 import StatsCard from "./StatsCard";
 
-function MileageStats({ inputsAreValid, setInputsAreValid }) {
+function MileageStats({ calculationsEnabled }) {
   const {
     mileageUnit,
     currentMileage,
@@ -18,6 +19,8 @@ function MileageStats({ inputsAreValid, setInputsAreValid }) {
     minDate,
     maxDate,
   } = useFirestore();
+
+  const { dashboardWarnings } = useInputValidity();
 
   const currentDate = getCurrentDate();
 
@@ -41,28 +44,24 @@ function MileageStats({ inputsAreValid, setInputsAreValid }) {
           displayName="Current"
           amountUnit={mileageUnit}
           amount={currentMileage}
-          minAmount={minMileage}
-          maxAmount={maxMileage}
-          inputsAreValid={inputsAreValid}
-          setInputsAreValid={setInputsAreValid}
         />
         <StatsCard
           displayName="Weekly average"
           amount={weeklyAverageMileage}
           amountUnit={mileageUnit}
-          inputsAreValid={inputsAreValid}
+          enabled={calculationsEnabled}
         />
         <StatsCard
           displayName="Weekly target"
           amount={weeklyTargetMileage}
           amountUnit={mileageUnit}
-          inputsAreValid={inputsAreValid}
+          enabled={calculationsEnabled}
         />
       </div>
       <div className="mt-5 text-gray-500">
-        {inputsAreValid
+        {calculationsEnabled
           ? `In the upcoming ${remainingWeeks} weeks, you can drive ${weeklyTargetMileage}${mileageUnit}/week on average.`
-          : "Please check your inputs, they seem to be conflicting with eachother."}
+          : dashboardWarnings}
       </div>
     </div>
   );

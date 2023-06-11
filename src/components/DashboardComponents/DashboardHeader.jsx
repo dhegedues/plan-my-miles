@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFirestore } from "../../firebase/Firestore";
 import { useAuth } from "../../firebase/Auth";
+import { useInputValidity } from "../../contexts/InputValidity";
 
 function HeaderTitle({ vehicleName, showVehicleSettings }) {
   return (
@@ -32,6 +33,7 @@ function HeaderButtons({
   showVehicleSettings,
   toggleShowVehicleSettings,
   handleLogOut,
+  exitingAllowed,
 }) {
   return (
     <div className="flex md:ml-4 md:mt-0">
@@ -49,9 +51,10 @@ function HeaderButtons({
             Log out
           </button>
           <button
+            disabled={!exitingAllowed}
             type="button"
             onClick={toggleShowVehicleSettings}
-            className="inline-flex items-center text-right rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="inline-flex items-center text-right rounded-md bg-indigo-600 disabled:bg-gray-300 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             <CheckIcon
               className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-100"
@@ -80,6 +83,7 @@ function HeaderButtons({
 function DashboardHeader({ showVehicleSettings, toggleShowVehicleSettings }) {
   const { vehicleName } = useFirestore();
   const { logOut } = useAuth();
+  const { vehicleSettingsAreValid } = useInputValidity();
   const navigate = useNavigate();
 
   const [showShadow, setShowShadow] = useState(false);
@@ -119,6 +123,7 @@ function DashboardHeader({ showVehicleSettings, toggleShowVehicleSettings }) {
         showVehicleSettings={showVehicleSettings}
         toggleShowVehicleSettings={toggleShowVehicleSettings}
         handleLogOut={handleLogOut}
+        exitingAllowed={vehicleSettingsAreValid}
       />
     </div>
   );

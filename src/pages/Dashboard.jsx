@@ -4,12 +4,13 @@ import DashboardContent from "../components/DashboardComponents/DashboardContent
 import VehicleSettings from "../components/SettingsComponents/VehicleSettings";
 import { useAuth } from "../firebase/Auth";
 import { useFirestore } from "../firebase/Firestore";
+import { useInputValidity } from "../contexts/InputValidity";
 
 function Dashboard() {
   const { currentUser } = useAuth();
   const { dataLoaded } = useFirestore();
+  const { allInputsAreValid } = useInputValidity();
 
-  const [inputsAreValid, setInputsAreValid] = useState(false);
   const [showVehicleSettings, setShowVehicleSettings] = useState(false);
   const toggleShowVehicleSettings = () =>
     setShowVehicleSettings(!showVehicleSettings);
@@ -25,10 +26,7 @@ function Dashboard() {
           {showVehicleSettings ? (
             <VehicleSettings />
           ) : (
-            <DashboardContent
-              inputsAreValid={inputsAreValid}
-              setInputsAreValid={setInputsAreValid}
-            />
+            <DashboardContent calculationsEnabled={allInputsAreValid} />
           )}
         </div>
       )}
