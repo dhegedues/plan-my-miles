@@ -17,8 +17,7 @@ function InputCard({ name, displayName, amountUnit, amount }) {
 
   const handleInputChange = (event) => {
     showValidationMessage(event.target.name, event.target.type);
-    const numberFromInput = Number(event.target.value);
-    updateDataField(name, numberFromInput);
+    updateDataField(event.target.name, event.target.type, event.target.value);
   };
 
   const handleKeyDown = (event) => {

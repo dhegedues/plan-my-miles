@@ -7,7 +7,6 @@ import {
   updateDoc,
   connectFirestoreEmulator,
 } from "firebase/firestore";
-import { getCurrentDate } from "../utils/utils";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -29,12 +28,14 @@ if (window.location.hostname === "localhost") {
   connectFirestoreEmulator(db, "localhost", 8080);
 }
 
-export const updateDataField = async (dataFieldName, newValue) => {
+export const updateDataField = async (dataFieldName, valueType, newValue) => {
   const { currentUser } = auth;
 
   if (currentUser) {
+    const valueToWrite = valueType === "number" ? Number(newValue) : newValue;
+
     await updateDoc(doc(db, "users", currentUser.uid), {
-      [dataFieldName]: newValue,
+      [dataFieldName]: valueToWrite,
     });
   }
 };
@@ -50,7 +51,6 @@ export const initializeCurrentUserData = async () => {
       currentMileage: 100,
       minDate: "2023-01-01",
       maxDate: "2023-12-31",
-      currentDate: getCurrentDate(),
       vehicleName: "My Vehicle",
     });
   }
