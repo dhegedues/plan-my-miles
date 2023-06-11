@@ -1,14 +1,14 @@
 import { PresentationChartLineIcon } from "@heroicons/react/24/solid";
 import Chart from "./Chart";
 
-function Projection({ inputsAreValid }) {
+function Projection({ calculationsEnabled }) {
   return (
     <div>
       <h2 className="text-lg font-medium leading-6 text-gray-900">
         Projection
       </h2>
       <div className="w-full h-[24rem] mt-2 flex flex-col justify-center items-center overflow-hidden rounded-lg bg-white shadow relative">
-        {inputsAreValid ? (
+        {calculationsEnabled ? (
           <Chart />
         ) : (
           <div className="p-5 flex flex-col xs:items-center xs:text-center">

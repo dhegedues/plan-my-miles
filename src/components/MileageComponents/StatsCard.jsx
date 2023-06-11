@@ -1,4 +1,4 @@
-function StatsCard({ displayName, amount, amountUnit, inputsAreValid }) {
+function StatsCard({ displayName, amount, amountUnit, enabled }) {
   return (
     <div
       key={displayName}
@@ -10,10 +10,10 @@ function StatsCard({ displayName, amount, amountUnit, inputsAreValid }) {
           <dd>
             <span
               className={`font-semibold text-xl sm:text-2xl ${
-                inputsAreValid ? "text-gray-900" : "text-gray-500"
+                enabled ? "text-gray-900" : "text-gray-500"
               }`}
             >
-              {inputsAreValid ? amount : "---"}
+              {enabled ? amount : "---"}
             </span>
             <span className="ml-1 font-light text-gray-500">{amountUnit}</span>
           </dd>

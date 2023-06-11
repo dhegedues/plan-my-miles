@@ -1,66 +1,21 @@
-import { useFirestore } from "../../firebase/Firestore";
-import { getCurrentDate, getDaysBetween } from "../../utils/utils";
+import { useInputValidity } from "../../contexts/InputValidity";
 import { updateDataField } from "../../firebase/firebase";
 
 function SettingsInput({ type, name, placeholder, value }) {
-  const { minDate, minMileage, maxMileage } = useFirestore();
+  const { inputValidities, valueBounds, showValidationMessage } =
+    useInputValidity();
 
   const handleInputChange = (event) => {
+    showValidationMessage(event.target.name, event.target.type);
     const newValue =
       type === "number" ? Number(event.target.value) : event.target.value;
     updateDataField(name, newValue);
   };
 
-  const determineMinValue = () => {
-    if (name === "maxDate") {
-      const currentDate = getCurrentDate();
-      if (getDaysBetween(minDate, currentDate) > 0) {
-        return currentDate;
-      }
-      return minDate;
-    }
-    if (name === "minMileage") {
-      return 0;
-    }
-    if (name === "maxMileage") {
-      return minMileage;
-    }
-
-    return null;
-  };
-
-  const determineMaxValue = () => {
-    if (name === "minDate") {
-      return getCurrentDate();
-    }
-    if (name === "minMileage") {
-      return maxMileage;
-    }
-
-    return null;
-  };
-
-  const determineValidity = () => {
-    if (name === "minMileage") {
-      return value >= determineMinValue() && determineMaxValue() >= value;
-    }
-    if (name === "maxMileage") {
-      return value >= determineMinValue();
-    }
-    if (name === "minDate") {
-      return getDaysBetween(value, determineMaxValue()) >= 0;
-    }
-    if (name === "maxDate") {
-      return getDaysBetween(determineMinValue(), value) >= 0;
-    }
-
-    return true;
-  };
-
   return (
     <div>
       {type === "mileageUnit" ? (
-        <div className="">
+        <div>
           <label htmlFor="mileageUnit" className="sr-only">
             Mileage unit
           </label>
@@ -82,11 +37,11 @@ function SettingsInput({ type, name, placeholder, value }) {
             name={name}
             id={name}
             value={value}
-            min={determineMinValue()}
-            max={determineMaxValue()}
+            min={valueBounds[name] && valueBounds[name].min}
+            max={valueBounds[name] && valueBounds[name].max}
             onChange={handleInputChange}
             placeholder={placeholder}
-            aria-invalid={!determineValidity()}
+            aria-invalid={!inputValidities[name]}
             className="block w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 aria-invalid:ring-2 aria-invalid:ring-red-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           />
         </div>
