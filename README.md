@@ -184,4 +184,4 @@ Distributed under the MIT License. See [License](./LICENSE.md) for more informat
 
 ## Contact
 
-Feel free to email me at <david@hegedues.org> if you have any questions or suggestions!
+Feel free to say <hello@dh.software> if you have any questions or suggestions!
