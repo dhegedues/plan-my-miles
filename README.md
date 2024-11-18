@@ -29,7 +29,7 @@
 
 ## About The Project
 
-PlanMyMiles is a web app that distributes your vehicle lease or insurance mileage budget dynamically and it lets you know if you have to change anything about your driving habits so that you can avoid costly overdraft.
+PlanMyMiles is a web app that helps you allocate your vehicle lease or insurance mileage budget effectively. By analyzing your driving patterns, it provides guidance on whether adjustments to your habits are needed, helping you avoid costly mileage overages.
 <br />
 
 ### Built with:
